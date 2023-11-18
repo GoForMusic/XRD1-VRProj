@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Template.VR.GameLogic;
 using UnityEngine;
 
 public class PressurePlateBehavior : MonoBehaviour
@@ -9,8 +10,10 @@ public class PressurePlateBehavior : MonoBehaviour
     [SerializeField] private float debounceTime = 1.0f; // Time in seconds for the debounce delay
 
     private bool isActivated = false;
-    private float lastActivationTime = -1f; 
+    private float lastActivationTime = -1f;
 
+    public CheckAnswer checkAnswer;
+    
     void OnTriggerEnter(Collider other)
     {
         AddRigidbodyToList(other);
@@ -66,6 +69,7 @@ public class PressurePlateBehavior : MonoBehaviour
 
     private void ActivatePlate()
     {
+        checkAnswer.CeckAnswer(pressurePlateName);
         isActivated = true;
         Debug.Log("HELLO PLATE: " + pressurePlateName);
     }
