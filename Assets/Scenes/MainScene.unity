@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rightAnswer: A
-  gamestasts: {fileID: 0}
+  gamestasts: {fileID: 1587826033}
 --- !u!108 &705507994 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 338960066514171465, guid: 6885ef9923c1d6e4c9b55e3af3d14285,
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbc25551621f7844bc5391c0148dc01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
+  level: 1
   score: 0
   PlayerTransform: {fileID: 0}
 --- !u!4 &1587826034
@@ -378,7 +378,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5195464391135705635, guid: 0fa4a9d59714eb841952a8c0dabf3580, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fa4a9d59714eb841952a8c0dabf3580, type: 3}
@@ -513,6 +514,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5639739440639988777, guid: 6885ef9923c1d6e4c9b55e3af3d14285, type: 3}
+    - {fileID: 3693346715202403920, guid: 6885ef9923c1d6e4c9b55e3af3d14285, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6885ef9923c1d6e4c9b55e3af3d14285, type: 3}

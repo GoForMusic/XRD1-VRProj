@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameStats : MonoBehaviour
 {
-    [SerializeField] private int level = 0;
+    [SerializeField] private int level = 1;
     [SerializeField] private int score = 0;
 
     [SerializeField]
