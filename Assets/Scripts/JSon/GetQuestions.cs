@@ -10,8 +10,11 @@ using UnityEngine;
 public class GetQuestions : MonoBehaviour
 {
 
+    [Header("Game-Logic")]
     [SerializeField]
-    public QuizData quizData;
+    private QuizData quizData;
+    [SerializeField] 
+    private Question selectedQuestion;
     public GameStats gamestasts;
 
     [Header("UI")]
@@ -34,15 +37,8 @@ public class GetQuestions : MonoBehaviour
             string jsonData = File.ReadAllText(filePath);
             ParseJSONData(jsonData);
 
-            var QuestionResult = quizData.questions.FirstOrDefault(q => q.level == gamestasts.GetLevel());
-
-            
-            questionText.text = QuestionResult.question;
-            answerA.text = QuestionResult.answers.A;
-            answerB.text = QuestionResult.answers.B;
-            answerC.text = QuestionResult.answers.C;
-            answerD.text = QuestionResult.answers.D;
-            statsUI.text = "Level: " + gamestasts.GetLevel() + " | " + "Score: " + gamestasts.GetScore();
+            selectedQuestion = quizData.questions.FirstOrDefault(q => q.level == gamestasts.GetLevel());
+            UpdateCanvas();
         }
         else
         {
@@ -51,8 +47,7 @@ public class GetQuestions : MonoBehaviour
 
         
     }
-
-
+    
     void ParseJSONData(string jsonData)
     {
         if (!string.IsNullOrEmpty(jsonData))
@@ -64,5 +59,32 @@ public class GetQuestions : MonoBehaviour
         {
             Debug.LogError("JSON data is empty or invalid.");
         }
+    }
+    
+    public void CeckAnswer(string answer)
+    {
+        if (answer.Equals(selectedQuestion.correctAnswer))
+        {
+            gamestasts.IncrementScore();
+            gamestasts.SetLevel();
+            Debug.Log(gamestasts.GetLevel() + " " + gamestasts.GetScore());
+            gamestasts.ReloadScene();
+        }
+        else
+        {
+            Debug.Log("Wrong Message");
+            gamestasts.DecrementScore();
+            UpdateCanvas();
+        }
+    }
+
+    private void UpdateCanvas()
+    {
+        questionText.text = selectedQuestion.question;
+        answerA.text = selectedQuestion.answers.A;
+        answerB.text = selectedQuestion.answers.B;
+        answerC.text = selectedQuestion.answers.C;
+        answerD.text = selectedQuestion.answers.D;
+        statsUI.text = "Level: " + gamestasts.GetLevel() + " | " + "Score: " + gamestasts.GetScore();
     }
 }

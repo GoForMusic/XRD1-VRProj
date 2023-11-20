@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.Template.VR.GameLogic;
 using UnityEngine;
 
 public class PressurePlateBehavior : MonoBehaviour
@@ -12,7 +11,7 @@ public class PressurePlateBehavior : MonoBehaviour
     private bool isActivated = false;
     private float lastActivationTime = -1f;
 
-    public CheckAnswer checkAnswer;
+    public GetQuestions checkAnswer;
     
     void OnTriggerEnter(Collider other)
     {

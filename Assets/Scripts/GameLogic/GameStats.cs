@@ -59,6 +59,11 @@ public class GameStats : MonoBehaviour
     {
         score += 100;
     }
+    
+    public void DecrementScore()
+    {
+        score -= 100;
+    }
 
     public int GetScore()
     {
