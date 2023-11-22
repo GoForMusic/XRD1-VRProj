@@ -30,22 +30,35 @@ public class GetQuestions : MonoBehaviour
     {
         gamestasts = GameObject.Find("GameStats").GetComponent<GameStats>();
 
-        string filePath = @"Assets\Scripts\JSon\apiResults.json";
+        string fileName = "apiResults.json";
+        string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
 
+        string jsonData = "";
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+        // For Android, use UnityWebRequest to read the file
+        var www = new WWW(filePath);
+        while (!www.isDone) { } // Wait for completion (in real scenarios, use coroutines)
+        jsonData = www.text;
+#else
+        // For other platforms including Editor, use File.ReadAllText
         if (File.Exists(filePath))
         {
-            string jsonData = File.ReadAllText(filePath);
-            ParseJSONData(jsonData);
-
-            selectedQuestion = quizData.questions.FirstOrDefault(q => q.level == gamestasts.GetLevel());
-            UpdateCanvas();
+            jsonData = File.ReadAllText(filePath);
         }
         else
         {
             Debug.LogError("File not found: " + filePath);
         }
+#endif
 
-        
+        if (!string.IsNullOrEmpty(jsonData))
+        {
+            ParseJSONData(jsonData);
+
+            selectedQuestion = quizData.questions.FirstOrDefault(q => q.level == gamestasts.GetLevel());
+            UpdateCanvas();
+        }
     }
     
     void ParseJSONData(string jsonData)
